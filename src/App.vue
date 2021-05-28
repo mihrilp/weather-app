@@ -6,45 +6,37 @@
         class="search-input"
         placeholder="Choose your city"
         v-model="city"
-        @keypress="fetchAPIData"
+        @keypress="getWeather"
       />
     </div>
-    <div class="weather">
-      <p>{{ city }}, {{ country }}</p>
-      <p>{{ description }}</p>
-      <p>{{ lowTemp }}</p>
-      <p>{{ highTemp }}</p>
-      <p>feelsLike: {{ feelsLike }}</p>
-      <p>humidity: {{ humidity }}</p>
+    <div class="results">
+      <div></div>
     </div>
   </div>
 </template>
 
 <script>
+import Card from "./components/Card.vue";
+
 export default {
   name: "App",
   data() {
     return {
       city: "",
-      country: "UK",
-      description: "Clouds everywhere",
-      lowTemp: "19",
-      highTemp: "30",
-      feelsLike: "20",
-      humidity: "55",
     };
   },
   methods: {
-    fetchAPIData(e) {
+    setResults(results) {
+      this.results = results;
+    },
+    getWeather(e) {
       if (e.key == "Enter") {
-        console.log(process.env.VUE_APP_API_KEY);
-        fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=${process.env.VUE_APP_API_KEY}`
-        )
-          .then((response) => response.json())
-          .then((data) => console.log(data));
+        return Card;
       }
     },
+  },
+  components: {
+    Card,
   },
 };
 </script>
