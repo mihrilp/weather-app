@@ -1,10 +1,11 @@
 <template>
   <div id="Card" class="results">
-    <p>oldu</p>
+    <div class="date">{{ day }},{{ date }}</div>
+    <p>{{ city }}, {{ country }}</p>
+    <p>{{ weather }}</p>
   </div>
 </template>
 
-<!--
 <script>
 import moment from "moment";
 export default {
@@ -16,19 +17,10 @@ export default {
       results: {},
     };
   },
-  methods: {
-    setResults(results) {
-      this.results = results;
-    },
-    fetchAPIData(e) {
-      if (e.key == "Enter") {
-        fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=${process.env.VUE_APP_API_KEY}`
-        )
-          .then((response) => response.json())
-          .then((data) => this.setResults(data));
-      }
-    },
+  props: {
+    city: String,
+    country: String,
+    weather: String,
   },
 };
 </script>
@@ -40,4 +32,3 @@ export default {
   box-sizing: border-box;
 }
 </style>
--->
